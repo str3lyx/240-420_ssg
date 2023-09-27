@@ -1,0 +1,20 @@
+version: '3'
+services:
+  directus:
+    image: docker.io/directus/directus:10.6.2
+    user: ${UID}:${GID}
+    ports:
+      - 8055:8055
+    volumes:
+      - type: bind
+        source: ./directus/data.db
+        target: ${PWD}/directus/data.db
+      - ./directus/uploads:${PWD}/directus/uploads
+    environment:
+      KEY: '2750524f-2a1a-4f84-8e3c-60ec982cf522'
+      SECRET: 'L_Qs13CM4HSVWRAIVu_abDeeKvfXdo18'
+      ADMIN_EMAIL: 'admin@example.com'
+      ADMIN_PASSWORD: 'password'
+      DB_CLIENT: 'sqlite3'
+      DB_FILENAME: '${PWD}/directus/data.db'
+      WEBSOCKETS_ENABLED: true
